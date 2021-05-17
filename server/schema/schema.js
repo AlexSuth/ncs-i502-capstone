@@ -50,6 +50,13 @@ const CategoryType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     photoUrl: { type: GraphQLString },
+    products: {
+      type: new GraphQLList(ProductType),
+      resolve(parent, args) {
+        console.log(parent);
+        return _.filter(products, { categoryId: parent.id });
+      },
+    },
   }),
 });
 
@@ -74,6 +81,12 @@ const ProductType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    categories: {
+      type: new GraphQLList(CategoryType),
+      resolve(parent, args) {
+        return categories;
+      },
+    },
     category: {
       type: CategoryType,
       args: { id: { type: GraphQLID } },
