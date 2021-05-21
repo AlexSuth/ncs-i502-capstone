@@ -1,6 +1,9 @@
 const graphql = require('graphql');
 const _ = require('lodash');
 
+const Category = require('../models/category');
+const Product = require('../models/product');
+
 const {
   GraphQLInt,
   GraphQLObjectType,
@@ -9,40 +12,6 @@ const {
   GraphQLID,
   GraphQLList,
 } = graphql;
-
-// dummy data
-var categories = [
-  { name: 'Flower', photoUrl: 'www.fakeurl.fake', id: '1' },
-  { name: 'Extracts', photoUrl: 'www.fakeurl.fake', id: '2' },
-  { name: 'Edibles', photoUrl: 'www.fakeurl.fake', id: '3' },
-];
-
-var products = [
-  {
-    name: 'Northern Lights 3.5g',
-    photoUrl: 'www.fakeurl.fake',
-    id: '1',
-    thc: '19.4%',
-    cbd: '0.2%',
-    categoryId: '1',
-  },
-  {
-    name: 'Yummy Chews 1:1',
-    photoUrl: 'www.fakeurl.fake',
-    id: '2',
-    thc: '100mg',
-    cbd: '100mg',
-    categoryId: '3',
-  },
-  {
-    name: 'White Widow Sauce 1g',
-    photoUrl: 'www.fakeurl.fake',
-    id: '3',
-    thc: '78.4%',
-    cbd: '2.2%',
-    categoryId: '2',
-  },
-];
 
 const CategoryType = new GraphQLObjectType({
   name: 'Category',
@@ -53,8 +22,7 @@ const CategoryType = new GraphQLObjectType({
     products: {
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
-        console.log(parent);
-        return _.filter(products, { categoryId: parent.id });
+        return Product.find({ categoryId: parent.id });
       },
     },
   }),
@@ -66,13 +34,12 @@ const ProductType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     photoUrl: { type: GraphQLString },
-    thc: { type: GraphQLString },
-    cbd: { type: GraphQLString },
+    thc: { type: GraphQLInt },
+    cbd: { type: GraphQLInt },
     category: {
-      type: new GraphQLList(CategoryType),
+      type: CategoryType,
       resolve(parent, args) {
-        console.log(parent);
-        return _.filter(categories, { id: parent.categoryId });
+        return Category.findById(parent.categoryId);
       },
     },
   }),
@@ -84,22 +51,67 @@ const RootQuery = new GraphQLObjectType({
     categories: {
       type: new GraphQLList(CategoryType),
       resolve(parent, args) {
-        return categories;
+        return Category.find({});
       },
     },
     category: {
       type: CategoryType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        //code to get data from db
-        console.log(typeof args.id);
-        return _.find(categories, { id: args.id });
+        return Category.findById(args.id);
       },
     },
     products: {
       type: new GraphQLList(ProductType),
       resolve(parent, args) {
-        return products;
+        return Product.find({});
+      },
+    },
+    product: {
+      type: ProductType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Product.findById(args.id);
+      },
+    },
+  },
+});
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addCategory: {
+      type: CategoryType,
+      args: {
+        name: { type: GraphQLString },
+        photoUrl: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let category = new Category({
+          name: args.name,
+          photoUrl: args.photoUrl,
+        });
+        return category.save();
+      },
+    },
+    addProduct: {
+      type: ProductType,
+      args: {
+        name: { type: GraphQLString },
+        photoUrl: { type: GraphQLString },
+        thc: { type: GraphQLInt },
+        cbd: { type: GraphQLInt },
+        categoryId: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let product = new Product({
+          name: args.name,
+          photoUrl: args.photoUrl,
+          thc: args.thc,
+          cbd: args.cbd,
+          categoryId: args.categoryId,
+        });
+        return product.save();
       },
     },
   },
@@ -107,4 +119,5 @@ const RootQuery = new GraphQLObjectType({
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
