@@ -12,7 +12,7 @@ import AboutPage from './pages/About/about.component';
 import CreateAccountPage from './pages/CreateAccount/createAccount.component';
 import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
-import EditProductsPage from './pages/EditProducts/editProducts.component';
+import CartPage from './pages/Cart/cart.component';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -40,7 +40,7 @@ const App = () => {
         <Route exact path='/create-account' component={CreateAccountPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
-        <Route exact path='/edit-products' component={EditProductsPage} />
+        <Route exact path='/cart' component={CartPage} />
       </Switch>
     </div>
   );
