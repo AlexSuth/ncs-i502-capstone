@@ -47,13 +47,13 @@ const NavBar = () => {
                 <Link to='/login'>Login</Link>
               </li>
               <li>
-                <Link to='/edit-products'>Edit Products</Link>
+                <Link to='/edit-products'>Edit Productscd</Link>
               </li>
             </ul>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
-            <IconButton aria-labe='Show Cart Items' color='inherit'>
+            <IconButton aria-label='Show Cart Items' color='inherit'>
               <Badge badgeContent={2} color='secondary'>
                 <ShoppingCart />
               </Badge>
