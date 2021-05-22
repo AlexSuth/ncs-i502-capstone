@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from './pages/Home/home.component';
+import AboutPage from './pages/About/about.component';
+import CreateAccountPage from './pages/CreateAccount/createAccount.component';
+import LoginPage from './pages/Login/login.component';
+import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
+import EditProductsPage from './pages/EditProducts/editProducts.component';
+
+class App extends React.Component {
+  
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route exact path='/' component={ HomePage } />
+          <Route path='/about' component={ AboutPage } />
+          <Route exact path='/create-account' component={ CreateAccountPage } />
+          <Route exact path='/login' component={ LoginPage }/>
+          <Route exact path='/reset-password' component={ ResetPasswordPage }/>
+          <Route exact path='/edit-products' component={ EditProductsPage }/>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
