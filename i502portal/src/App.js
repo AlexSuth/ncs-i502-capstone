@@ -42,6 +42,7 @@ const App = () => {
     <div>
       <NavBar totalItems={cart.total_items} />
       <Cart cart={cart} />
+      <ProductPage products={products} onAddToCart={handleAddToCart} />
 
       {/* <Switch>
         <Route exact path='/' component={HomePage} />
