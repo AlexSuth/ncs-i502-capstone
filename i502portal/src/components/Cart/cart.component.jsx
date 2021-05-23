@@ -54,7 +54,7 @@ const Cart = ({ cart }) => {
       <Typography className={classes.title} variant='h3'>
         Your Shopping Cart
       </Typography>
-      {cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
     </Container>
   );
 };

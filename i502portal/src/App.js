@@ -41,10 +41,8 @@ const App = () => {
   return (
     <div>
       <NavBar totalItems={cart.total_items} />
-      <Cart cart={cart} />
-      <ProductPage products={products} onAddToCart={handleAddToCart} />
 
-      {/* <Switch>
+      <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/about' component={() => <Cart cart={cart} />} />
         <Route
@@ -57,7 +55,7 @@ const App = () => {
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
         <Route exact path='/edit-products' component={EditProductsPage} />
-      </Switch> */}
+      </Switch>
     </div>
   );
 };
