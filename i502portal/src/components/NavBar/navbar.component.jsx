@@ -16,7 +16,7 @@ import useStyles from './navbar.styles';
 
 import logo from '../../assets/e-commerce.png';
 
-const NavBar = () => {
+const NavBar = ({ totalItems }) => {
   const classes = useStyles();
   return (
     <>
@@ -30,7 +30,7 @@ const NavBar = () => {
               className={classes.image}
             />
             i502 Portal
-            <ul>
+            {/* <ul>
               <li>
                 <Link to='/'>Home</Link>
               </li>
@@ -49,12 +49,12 @@ const NavBar = () => {
               <li>
                 <Link to='/edit-products'>Edit Productscd</Link>
               </li>
-            </ul>
+            </ul> */}
           </Typography>
           <div className={classes.grow} />
           <div className={classes.button}>
             <IconButton aria-label='Show Cart Items' color='inherit'>
-              <Badge badgeContent={2} color='secondary'>
+              <Badge badgeContent={totalItems} color='secondary'>
                 <ShoppingCart />
               </Badge>
             </IconButton>
