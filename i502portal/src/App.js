@@ -13,58 +13,53 @@ import CreateAccountPage from './pages/CreateAccount/createAccount.component';
 import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
 import EditProductsPage from './pages/EditProducts/editProducts.component';
+import Cart from './components/Cart/cart.component';
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState({});
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
-
     setProducts(data);
+  };
+
+  const fetchCart = async () => {
+    setCart(await commerce.cart.retrieve());
   };
 
   useEffect(() => {
     fetchProducts();
+    fetchCart();
   }, []);
 
-  console.log(products);
-  console.log(process.env.REACT_APP_CHEC_PUBLIC_KEY);
-
+  const handleAddToCart = async (productId, quantity) => {
+    const item = await commerce.cart.add(productId, quantity);
+    setCart(item.cart);
+  };
+  console.log(cart);
   return (
     <div>
-      <NavBar />
-      <Switch>
+      <NavBar totalItems={cart.total_items} />
+      <Cart cart={cart} />
+      <ProductPage products={products} onAddToCart={handleAddToCart} />
+
+      {/* <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route path='/about' component={AboutPage} />
-        <Route path='/products' component={ProductPage} />
+        <Route path='/about' component={() => <Cart cart={cart} />} />
+        <Route
+          path='/products'
+          component={() => (
+            <ProductPage products={products} onAddToCart={handleAddToCart} />
+          )}
+        />
         <Route exact path='/create-account' component={CreateAccountPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
         <Route exact path='/edit-products' component={EditProductsPage} />
-      </Switch>
+      </Switch> */}
     </div>
   );
 };
 
 export default App;
-
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <NavBar />
-//         <Switch>
-//           <Route exact path='/' component={HomePage} />
-//           <Route path='/about' component={AboutPage} />
-//           <Route path='/products' component={ProductPage} />
-//           <Route exact path='/create-account' component={CreateAccountPage} />
-//           <Route exact path='/login' component={LoginPage} />
-//           <Route exact path='/reset-password' component={ResetPasswordPage} />
-//           <Route exact path='/edit-products' component={EditProductsPage} />
-//         </Switch>
-//       </div>
-//     );
-//   }
-// }
-
-// export default App;
