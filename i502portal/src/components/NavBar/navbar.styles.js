@@ -65,4 +65,14 @@ export default makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  navDisplayFlex: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    backgroundColor: 'lightblue'
+  },
+  linkText: {
+    textDecoration: 'none',
+    textTransform: 'uppercase',
+    color: 'black'
+  }
 }));
