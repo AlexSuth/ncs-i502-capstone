@@ -34,38 +34,38 @@ const navLinks = [
   // { title: 'Reset Password', path: '/reset' },
 ]
 
-const useStyle = makeStyles({
-  navDisplayFlex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: 'lightblue'
-  },
-  linkText: {
-    textDecoration: 'none',
-    textTransform: 'uppercase',
-    color: 'black'
-  }
-});
+// const useStyle = makeStyles({
+//   navDisplayFlex: {
+//     display: 'flex',
+//     justifyContent: 'space-between',
+//     backgroundColor: 'lightblue'
+//   },
+//   linkText: {
+//     textDecoration: 'none',
+//     textTransform: 'uppercase',
+//     color: 'black'
+//   }
+// });
 
 const NavBar = ({ totalItems }) => {
   const classes = useStyles();
-  const styles = useStyle();
+  // const styles = useStyle();
   return (
     <>
       <AppBar position='fixed' className={classes.appBar} color='inherit'>
         <Toolbar>
           <Typography varient='h6' className={classes.title} color='inherit'>
 
-          <Container className={styles.navbarDisplayFlex}>
+          <Container className={classes.navbarDisplayFlex}>
           
-        <List component="nav" aria-labelledby="main navigation" className={styles.navDisplayFlex}>
+        <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
 
         <IconButton edge="start" color="inherit" aria-label="home">
           <Home fontSize="large" />
         </IconButton>
         
     {navLinks.map(({ title, path }) => (
-      <a href={path} key={title} className={styles.linkText}>
+      <a href={path} key={title} className={classes.linkText}>
         <ListItem button>
           <ListItemText primary={title} />
         </ListItem>
@@ -79,39 +79,9 @@ const NavBar = ({ totalItems }) => {
   </List>
   
   </Container>
-
-            <img
-              src={logo}
-              alt='i502 Portal'
-              height='25px'
-              className={classes.image}
-            />
-            i502 Portal
-            {/* <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/about'>About</Link>
-              </li>
-              <li>
-                <Link to='/products'>Shop</Link>
-              </li>
-              <li>
-                <Link to='/create-account'>Create Account</Link>
-              </li>
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/edit-products'>Edit Productscd</Link>
-              </li>
-            </ul> */}
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.button}>
             
-          </div>
+          </Typography>
+          
         </Toolbar>
       </AppBar>
     </>
