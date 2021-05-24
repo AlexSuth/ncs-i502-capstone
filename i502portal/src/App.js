@@ -14,7 +14,6 @@ import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
 import CartPage from './pages/Cart/cart.component';
 
-import EditProductsPage from './pages/EditProducts/editProducts.component';
 import Cart from './components/Cart/cart.component';
 
 const App = () => {
@@ -30,29 +29,54 @@ const App = () => {
     setCart(await commerce.cart.retrieve());
   };
 
+  const handleAddToCart = async (productId, quantity) => {
+    const { cart } = await commerce.cart.add(productId, quantity);
+    setCart(cart);
+  };
+
+  const handleUpdateCartQty = async (productId, quantity) => {
+    const { cart } = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  };
+
+  const handleRemoveFromCart = async (productId) => {
+    const { cart } = await commerce.cart.remove(productId);
+    setCart(cart);
+  };
+
+  const handleEmptyCart = async () => {
+    const { cart } = await commerce.cart.empty();
+    setCart(cart);
+  };
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, []);
 
-  const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    setCart(item.cart);
-  };
-  console.log(cart);
   return (
     <div>
       <NavBar totalItems={cart.total_items} />
-      <Cart cart={cart} />
-      <ProductPage products={products} onAddToCart={handleAddToCart} />
 
    <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route path='/about' component={() => <Cart cart={cart} />} />
+        <Route path='/about' component={AboutPage} />
         <Route
           path='/products'
           component={() => (
             <ProductPage products={products} onAddToCart={handleAddToCart} />
+          )}
+        />
+        <Route
+          exact
+          path='/cart'
+          component={() => (
+            <Cart
+              cart={cart}
+              handleUpdateCartQty={handleUpdateCartQty}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleEmptyCart={handleEmptyCart}
+            />
           )}
         />
         <Route exact path='/create-account' component={CreateAccountPage} />
@@ -60,7 +84,6 @@ const App = () => {
         <Route exact path='/reset-password' component={ResetPasswordPage} />
         <Route exact path='/cart' component={CartPage} />
     </Switch>
-
     </div>
   );
 };
