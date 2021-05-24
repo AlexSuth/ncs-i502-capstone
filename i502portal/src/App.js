@@ -12,7 +12,8 @@ import AboutPage from './pages/About/about.component';
 import CreateAccountPage from './pages/CreateAccount/createAccount.component';
 import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
-import EditProductsPage from './pages/EditProducts/editProducts.component';
+import CartPage from './pages/Cart/cart.component';
+
 import Cart from './components/Cart/cart.component';
 
 const App = () => {
@@ -57,7 +58,7 @@ const App = () => {
     <div>
       <NavBar totalItems={cart.total_items} />
 
-      <Switch>
+   <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/about' component={AboutPage} />
         <Route
@@ -81,7 +82,8 @@ const App = () => {
         <Route exact path='/create-account' component={CreateAccountPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
-      </Switch>
+        <Route exact path='/cart' component={CartPage} />
+    </Switch>
     </div>
   );
 };
