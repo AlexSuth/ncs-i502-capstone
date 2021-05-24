@@ -12,7 +12,6 @@ import AboutPage from './pages/About/about.component';
 import CreateAccountPage from './pages/CreateAccount/createAccount.component';
 import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
-import EditProductsPage from './pages/EditProducts/editProducts.component';
 import Cart from './components/Cart/cart.component';
 
 const App = () => {
