@@ -14,7 +14,6 @@ import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
 import CartPage from './pages/Cart/cart.component';
 
-import EditProductsPage from './pages/EditProducts/editProducts.component';
 import Cart from './components/Cart/cart.component';
 
 const App = () => {
