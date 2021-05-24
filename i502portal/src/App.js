@@ -12,6 +12,8 @@ import AboutPage from './pages/About/about.component';
 import CreateAccountPage from './pages/CreateAccount/createAccount.component';
 import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
+import CartPage from './pages/Cart/cart.component';
+
 import EditProductsPage from './pages/EditProducts/editProducts.component';
 import Cart from './components/Cart/cart.component';
 
@@ -44,7 +46,7 @@ const App = () => {
       <Cart cart={cart} />
       <ProductPage products={products} onAddToCart={handleAddToCart} />
 
-      {/* <Switch>
+   <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/about' component={() => <Cart cart={cart} />} />
         <Route
@@ -56,8 +58,9 @@ const App = () => {
         <Route exact path='/create-account' component={CreateAccountPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
-        <Route exact path='/edit-products' component={EditProductsPage} />
-      </Switch> */}
+        <Route exact path='/cart' component={CartPage} />
+    </Switch>
+
     </div>
   );
 };
