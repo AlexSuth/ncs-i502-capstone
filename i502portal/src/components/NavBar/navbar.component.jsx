@@ -13,13 +13,16 @@ import {
   makeStyles,
   Container,
   Hidden,
+  Fab,
 } from '@material-ui/core';
 
-import { Home, ShoppingCart } from '@material-ui/icons';
+import { Home, ShoppingCart, KeyboardArrowUp } from '@material-ui/icons';
 import { Link, useLocation } from 'react-router-dom';
 import useStyles from './navbar.styles';
 
 import SideDrawer from './sidedrawer.component';
+import HideOnScroll from './hideonscroll.component';
+import BackToTop from './backtotop.component';
 
 const navLinks = [
   { title: 'Home', path: '/home' },
@@ -37,6 +40,7 @@ const NavBar = ({ totalItems }) => {
 
   return (
     <>
+    <HideOnScroll>
       <AppBar position='fixed' className={classes.appBar} color='inherit'>
         <Toolbar>
 
@@ -88,6 +92,13 @@ const NavBar = ({ totalItems }) => {
           
         </Toolbar>
       </AppBar>
+      </HideOnScroll>
+      <Toolbar id="back-to-top-anchor" />
+      <BackToTop>
+        <Fab color="secondary" size="large" aria-label="scroll back to top">
+          <KeyboardArrowUp />
+        </Fab>
+      </BackToTop>
     </>
   );
 };
