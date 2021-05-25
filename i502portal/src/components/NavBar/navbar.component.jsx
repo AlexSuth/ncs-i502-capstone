@@ -12,17 +12,17 @@ import {
   ListItemText,
   makeStyles,
   Container,
+  Hidden,
+  Fab,
 } from '@material-ui/core';
 
-import { Home } from '@material-ui/icons'
-
-import { ShoppingCart } from '@material-ui/icons';
-
+import { Home, ShoppingCart, KeyboardArrowUp } from '@material-ui/icons';
 import { Link, useLocation } from 'react-router-dom';
-
 import useStyles from './navbar.styles';
 
-import logo from '../../assets/e-commerce.png';
+import SideDrawer from './sidedrawer.component';
+import HideOnScroll from './hideonscroll.component';
+import BackToTop from './backtotop.component';
 
 const navLinks = [
   { title: 'Home', path: '/home' },
@@ -30,72 +30,61 @@ const navLinks = [
   { title: 'Products', path: 'products' },
   { title: 'Login', path: '/login' },
   // { title: 'Create Account', path: '/create-account' },
-  // { title: 'Edit Products', path: '/edit-products' },
   // { title: 'Reset Password', path: '/reset' },
 ]
-
-// const useStyle = makeStyles({
-//   navDisplayFlex: {
-//     display: 'flex',
-//     justifyContent: 'space-between',
-//     backgroundColor: 'lightblue'
-//   },
-//   linkText: {
-//     textDecoration: 'none',
-//     textTransform: 'uppercase',
-//     color: 'black'
-//   }
-// });
 
 const NavBar = ({ totalItems }) => {
   const classes = useStyles();
 
   const location = useLocation();
 
-  // const styles = useStyle();
-
   return (
     <>
+    <HideOnScroll>
       <AppBar position='fixed' className={classes.appBar} color='inherit'>
         <Toolbar>
 
           <Typography varient='h6' className={classes.title} color='inherit'>
 
           <Container className={classes.navbarDisplayFlex}>
-          
+          <Hidden smDown>
         <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
 
-        <IconButton edge="start" color="inherit" aria-label="home">
-          <Home fontSize="large" />
-        </IconButton>
-        
-    {navLinks.map(({ title, path }) => (
-      <a href={path} key={title} className={classes.linkText}>
-        <ListItem button>
-          <ListItemText primary={title} />
-        </ListItem>
-      </a>
-    ))}
-    <IconButton aria-label='Show Cart Items' color='inherit'>
-              <Badge badgeContent={totalItems} color='secondary'>
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
-    {location.pathname !== '/cart' && (
-                <div className={classes.button}>
-                  <IconButton
-                    component={Link}
-                    to='/cart'
-                    aria-label='Show Cart Items'
-                    color='inherit'
-                  >
-                    <Badge badgeContent={totalItems} color='secondary'>
-                      <ShoppingCart />
-                    </Badge>
-                  </IconButton>
-                </div>
-              )}
-  </List>
+          <IconButton edge="start" color="inherit" aria-label="home">
+            <Home fontSize="large" />
+          </IconButton>
+          {navLinks.map(({ title, path }) => (
+            <a href={path} key={title} className={classes.linkText}>
+          <ListItem button>
+            <ListItemText primary={title} />
+          </ListItem>
+        </a>
+      ))}
+      <IconButton aria-label='Show Cart Items' color='inherit'>
+                <Badge badgeContent={totalItems} color='secondary'>
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+      {location.pathname !== '/cart' && (
+                  <div className={classes.button}>
+                    <IconButton
+                      component={Link}
+                      to='/cart'
+                      aria-label='Show Cart Items'
+                      color='inherit'
+                    >
+                      <Badge badgeContent={totalItems} color='secondary'>
+                        <ShoppingCart />
+                      </Badge>
+                    </IconButton>
+                  </div>
+                )}
+    </List>
+    </Hidden>
+    
+    <Hidden mdUp> 
+      <SideDrawer navLinks={navLinks} />
+    </Hidden>
   
   </Container>
             
@@ -103,6 +92,13 @@ const NavBar = ({ totalItems }) => {
           
         </Toolbar>
       </AppBar>
+      </HideOnScroll>
+      <Toolbar id="back-to-top-anchor" />
+      <BackToTop>
+        <Fab color="secondary" size="large" aria-label="scroll back to top">
+          <KeyboardArrowUp />
+        </Fab>
+      </BackToTop>
     </>
   );
 };
