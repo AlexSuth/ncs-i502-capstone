@@ -55,7 +55,7 @@ const NavBar = ({ totalItems }) => {
                       component={Link}
                       to='/'
                       edge='start'
-                      color='inherit'
+                      color='#F9F9F9'
                       aria-label='home'
                     >
                       <Home fontSize='large' />

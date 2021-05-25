@@ -4,6 +4,7 @@ const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
   appBar: {
+    backgroundColor: '#03ACFA',
     boxShadow: 'none',
     borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
     [theme.breakpoints.up('sm')]: {
@@ -68,7 +69,7 @@ export default makeStyles((theme) => ({
   navDisplayFlex: {
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: 'lightblue'
+    backgroundColor: '#03ACFA'
   },
   linkText: {
     textDecoration: 'none',
