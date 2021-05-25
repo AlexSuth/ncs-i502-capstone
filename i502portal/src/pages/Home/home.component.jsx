@@ -4,18 +4,15 @@ import ShopAll from '../../components/Views/ShopAll/shopAll.component'
 import Help from '../../components/Views/Help/help.component'
 import ShopSections from '../../components/Views/ShopSections/shopSections.component';
 
-
 const HomePage = () => {
-
   return (
-    <div className = 'home'>
+    // <div className = 'home'>
+    <>
       <AgeConsentDialog/>
       <ShopAll />
       <ShopSections />
-      <Help />
-      
-    </div>
+      <Help />      
+    </>
   );
-
 }
 export default HomePage;
