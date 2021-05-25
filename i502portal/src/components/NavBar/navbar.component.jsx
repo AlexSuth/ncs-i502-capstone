@@ -12,6 +12,7 @@ import {
   ListItemText,
   makeStyles,
   Container,
+  Hidden,
 } from '@material-ui/core';
 
 import { Home, ShoppingCart } from '@material-ui/icons';
@@ -42,7 +43,7 @@ const NavBar = ({ totalItems }) => {
           <Typography varient='h6' className={classes.title} color='inherit'>
 
           <Container className={classes.navbarDisplayFlex}>
-          
+          <Hidden smDown>
         <List component="nav" aria-labelledby="main navigation" className={classes.navDisplayFlex}>
 
           <IconButton edge="start" color="inherit" aria-label="home">
@@ -75,8 +76,11 @@ const NavBar = ({ totalItems }) => {
                   </div>
                 )}
     </List>
+    </Hidden>
     
-  <SideDrawer navLinks={navLinks} />
+    <Hidden mdUp> 
+      <SideDrawer navLinks={navLinks} />
+    </Hidden>
   
   </Container>
             
