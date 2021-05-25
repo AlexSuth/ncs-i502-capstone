@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 import useStyles from './login.styles';
-import logo from '../../assets/e-commerce.png';
+import logo from '../../assets/brandlogo.png';
 
 
 const LoginPage = () => {
