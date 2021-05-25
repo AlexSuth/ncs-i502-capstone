@@ -14,6 +14,8 @@ import Container from '@material-ui/core/Container';
 import useStyles from './login.styles';
 import logo from '../../assets/brandlogo.png';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 
 const LoginPage = () => {
   const classes = useStyles();
@@ -67,6 +69,16 @@ const LoginPage = () => {
         >
           Submit
         </Button>
+        <Button
+          onClick={signInWithGoogle}
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Or Sign-In With Google
+        </Button>
+        
         <Grid container>
           <Grid item xs>
             <Link href="/reset-password" variant="body2">
@@ -80,6 +92,7 @@ const LoginPage = () => {
           </Grid>
         </Grid>
       </form>
+      
     </div>
   </Container>
   );
