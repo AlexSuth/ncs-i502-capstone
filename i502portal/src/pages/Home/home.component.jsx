@@ -6,7 +6,6 @@ import ShopSections from '../../components/Views/ShopSections/shopSections.compo
 
 const HomePage = () => {
   return (
-    // <div className = 'home'>
     <>
       <AgeConsentDialog/>
       <ShopAll />

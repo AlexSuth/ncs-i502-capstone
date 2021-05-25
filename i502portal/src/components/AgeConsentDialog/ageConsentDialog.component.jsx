@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 
 import useStyles from './ageConsentDialog.styles';
-import logo from '../../assets/e-commerce.png';
+import logo from '../../assets/brandlogo.png';
 
 const AgeConsentDialog = () => {
   const classes = useStyles();
