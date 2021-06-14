@@ -13,8 +13,9 @@ import LoginPage from './pages/Login/login.component';
 import ResetPasswordPage from './pages/ResetPassword/resetPassword.component';
 import CartPage from './pages/Cart/cart.component';
 import Cart from './components/Cart/cart.component';
+import Checkout from './components/CheckoutForm/Checkout/checkout.component';
 
-import { auth } from './firebase/firebase.utils'
+import { auth } from './firebase/firebase.utils';
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -58,7 +59,7 @@ const App = () => {
     <div>
       <NavBar totalItems={cart.total_items} />
 
-   <Switch>
+      <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/about' component={AboutPage} />
         <Route
@@ -79,11 +80,14 @@ const App = () => {
             />
           )}
         />
+        <Route exact path='/checkout'>
+          <Checkout cart={cart} />
+        </Route>
         <Route exact path='/create-account' component={CreateAccountPage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/reset-password' component={ResetPasswordPage} />
         <Route exact path='/cart' component={CartPage} />
-    </Switch>
+      </Switch>
     </div>
   );
 };

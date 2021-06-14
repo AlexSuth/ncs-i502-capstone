@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Typography, Button, Grid } from '@material-ui/core';
 
 import CartItem from './CartItem/cartItem.component';
-
+import { Link } from 'react-router-dom';
 import useStyles from './cart.styles';
 
 const Cart = ({
@@ -50,6 +50,8 @@ const Cart = ({
             type='button'
             variant='contained'
             color='primary'
+            component={Link}
+            to='/checkout'
           >
             Checkout
           </Button>
